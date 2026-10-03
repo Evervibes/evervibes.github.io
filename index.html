@@ -1,0 +1,164 @@
+
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0f"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="index">
+<title>index</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0f;--card:#14141c;--fg:#f4f2ee;--mut:#8b8b99;--ac:#ff2d55;--ac2:#ff9a3d;--sa:env(safe-area-inset-top,0px);--sb:env(safe-area-inset-bottom,0px);--e:cubic-bezier(.22,1,.36,1);--hf:'Bebas Neue',Impact,'Arial Narrow',sans-serif}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{background:var(--bg)}html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}.lenis.lenis-stopped{overflow:hidden}
+body{margin:0;color:var(--fg);font:16px/1.5 Inter,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}.mut{color:var(--mut)}.view{display:none}.view.on{display:block}
+#pl{position:fixed;inset:0;z-index:100;background:var(--bg);display:flex;flex-direction:column;gap:18px;align-items:center;justify-content:center;animation:plo .6s 2.6s forwards}
+#pl.done{opacity:0;visibility:hidden;transition:opacity .7s,visibility 0s .7s;pointer-events:none}
+.plt{font:42px var(--hf);letter-spacing:6px;animation:pul 1.2s ease-in-out infinite}.plb{width:140px;height:3px;background:#ffffff18;border-radius:3px;overflow:hidden}.plb i{display:block;height:100%;background:linear-gradient(90deg,var(--ac),var(--ac2));animation:ld 1.6s var(--e) forwards}
+@keyframes plo{to{opacity:0;visibility:hidden;pointer-events:none}}@keyframes pul{50%{opacity:.5;transform:scale(.98)}}@keyframes ld{from{width:0}to{width:100%}}
+header{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;align-items:center;gap:12px;padding:calc(10px + var(--sa)) 16px 10px;background:rgba(10,10,15,.7);-webkit-backdrop-filter:blur(16px) saturate(1.4);backdrop-filter:blur(16px) saturate(1.4);border-bottom:1px solid #ffffff12;transition:transform .5s var(--e)}
+header.h{transform:translateY(-100%)}
+.logo{font:28px var(--hf);letter-spacing:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:55%}
+#sq{flex:1;max-width:340px;margin-left:auto;background:#ffffff10;border:1px solid #ffffff18;color:var(--fg);border-radius:999px;padding:9px 16px;font:inherit;outline:0;transition:.3s}
+#sq:focus{border-color:var(--ac);box-shadow:0 0 0 4px #ff2d5533}
+.hero{position:relative;min-height:62vh;display:grid;place-items:center;text-align:center;padding:calc(90px + var(--sa)) 20px 40px;overflow:hidden}
+.hero:before{content:"";position:absolute;inset:-20%;background:radial-gradient(circle,#ffffff16 1.5px,transparent 2px) 0 0/18px 18px;animation:dots 14s linear infinite;-webkit-mask-image:radial-gradient(ellipse at center,#000 20%,transparent 70%);mask-image:radial-gradient(ellipse at center,#000 20%,transparent 70%)}
+@keyframes dots{to{background-position:180px 180px}}
+.glow{position:absolute;width:560px;height:560px;max-width:120vw;border-radius:50%;background:radial-gradient(circle,#ff2d5542,transparent 65%);left:var(--mx,50%);top:var(--my,40%);transform:translate(-50%,-50%);pointer-events:none;transition:left .7s var(--e),top .7s var(--e)}
+.hero>div:last-child{position:relative}.hero h1{font:clamp(52px,13vw,150px)/.95 var(--hf);margin:0;letter-spacing:3px;overflow:hidden;padding:.04em 0}
+.hero h1 span{display:inline-block;animation:up 1s var(--e) both;animation-delay:calc(var(--i)*45ms + 700ms)}
+@keyframes up{from{transform:translateY(110%) rotate(8deg);opacity:0}}
+.hero p{margin:14px 0 0;color:var(--mut);animation:fi 1s 1.4s both}@keyframes fi{from{opacity:0}}
+.mq{overflow:hidden;white-space:nowrap;border-block:1px solid #ffffff12;padding:10px 0;background:#ffffff05}
+.mq div{display:inline-block;animation:mq 40s linear infinite;font:22px var(--hf);letter-spacing:3px;color:var(--mut)}.mq i{color:var(--ac);font-style:normal;margin:0 18px}
+@keyframes mq{to{transform:translateX(-50%)}}
+.wrap{max-width:1280px;margin:0 auto;padding:28px 16px 90px}.sec{display:flex;align-items:baseline;justify-content:space-between;margin:0 0 16px}.sec h2{font:36px var(--hf);letter-spacing:2px;margin:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px}@media(min-width:700px){.grid{grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:24px}}
+.cd{display:block;opacity:0;transform:translateY(36px) scale(.96);transition:opacity .8s var(--e),transform .8s var(--e);transition-delay:calc(var(--i)*70ms)}.cd.in{opacity:1;transform:none}
+.cv{position:relative;aspect-ratio:2/3;border-radius:16px;overflow:hidden;background:linear-gradient(110deg,#17171f 30%,#24242e 50%,#17171f 70%) 0 0/200% 100%;animation:sh 1.4s linear infinite;box-shadow:0 10px 30px #0008;transition:box-shadow .4s}
+.cv.ok{animation:none}@keyframes sh{to{background-position:-200% 0}}
+.cv img{width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:transform .9s var(--e),opacity .6s}.cv img.ok{opacity:1}
+.cv:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 60%,#000a);pointer-events:none}
+.cd:hover .cv img{transform:scale(1.07)}.cd:hover .cv{box-shadow:0 18px 50px #ff2d5545}
+.pb{position:absolute;left:0;bottom:0;height:4px;z-index:2;width:var(--p);background:linear-gradient(90deg,var(--ac),var(--ac2))}
+.tt{padding:10px 4px 0;font-weight:600;line-height:1.25}.tt small{display:block;color:var(--mut);font-weight:400;margin-top:2px}
+.dt{display:grid;gap:22px;max-width:1000px;margin:0 auto;padding:calc(88px + var(--sa)) 16px 90px}.dt>*{animation:up2 .9s var(--e) both}.dt>*:nth-child(2){animation-delay:.12s}@keyframes up2{from{opacity:0;transform:translateY(30px)}}
+@media(min-width:760px){.dt{grid-template-columns:300px 1fr;gap:44px;align-items:start}}
+.dt .cv{box-shadow:0 30px 80px #000a;max-width:340px}.dt h1{font:clamp(44px,8vw,84px)/.95 var(--hf);margin:0 0 8px;letter-spacing:2px}.dt h3{margin:28px 0 12px;font:26px var(--hf);letter-spacing:2px}.meta{color:var(--mut);margin-bottom:20px}
+.br{display:flex;gap:12px;flex-wrap:wrap}
+.btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;border:1px solid #ffffff22;background:#ffffff10;color:var(--fg);font:600 16px Inter,system-ui,sans-serif;cursor:pointer;transition:transform .3s var(--e),box-shadow .3s}
+.btn.p{background:linear-gradient(135deg,var(--ac),var(--ac2));border:0;box-shadow:0 10px 30px #ff2d5555}.btn:hover{transform:translateY(-3px)}.btn:active{transform:scale(.96)}
+.btn.p:after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 30%,#ffffff55 50%,transparent 70%);transform:translateX(-120%);animation:sw 3.5s 1.5s infinite}@keyframes sw{to{transform:translateX(120%)}}
+.chs{display:grid;grid-template-columns:repeat(auto-fill,minmax(48px,1fr));gap:8px}.ch{padding:10px 0;border-radius:10px;border:1px solid #ffffff18;background:#ffffff0a;color:var(--fg);font:inherit;cursor:pointer;transition:.25s}.ch:hover{background:var(--ac);border-color:var(--ac);transform:translateY(-2px)}
+#rd{position:fixed;inset:0;z-index:50;background:#000;display:none;overflow:hidden;touch-action:manipulation}#rd.on{display:block}
+.tb{position:absolute;left:0;right:0;z-index:5;display:flex;align-items:center;gap:8px;padding:10px 12px;transition:transform .45s var(--e),opacity .45s}
+.tb.t{top:0;padding-top:calc(10px + var(--sa));background:linear-gradient(#000d,transparent)}.tb.b{bottom:0;padding-bottom:calc(10px + var(--sb));background:linear-gradient(transparent,#000d)}
+#rd.ui-off .tb.t{transform:translateY(-110%);opacity:0}#rd.ui-off .tb.b{transform:translateY(110%);opacity:0}
+.ib{flex:none;width:44px;height:44px;border-radius:50%;border:0;background:#ffffff1c;color:#fff;font-size:20px;display:grid;place-items:center;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);cursor:pointer;transition:transform .25s var(--e),background .25s}.ib:active{transform:scale(.86)}.ib:hover{background:#ffffff38}
+.rt{flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-weight:600}#cn{font-size:13px;color:#ccc;min-width:62px;text-align:center}#sl{flex:1;min-width:60px;accent-color:var(--ac);height:30px}
+#bar{position:absolute;left:0;top:0;height:3px;width:0;z-index:6;background:linear-gradient(90deg,var(--ac),var(--ac2));transition:width .4s var(--e)}
+#pv{position:absolute;inset:0;display:none;overflow:hidden}#pv:before{content:"";position:absolute;left:50%;top:50%;margin:-17px;width:34px;height:34px;border:3px solid #ffffff30;border-top-color:var(--ac);border-radius:50%;animation:spin .8s linear infinite}#pv.ld:before{display:none}@keyframes spin{to{transform:rotate(360deg)}}
+#pv img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;-webkit-user-select:none;user-select:none;-webkit-user-drag:none;will-change:transform,opacity}
+#sv{position:absolute;inset:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;display:none;scroll-behavior:smooth}#sv img{display:block;width:100%;max-width:900px;margin:0 auto;min-height:60vh;background:#0d0d12}#sv img.ok{min-height:0}
+#rd.paged #pv{display:block}#rd.scroll #sv{display:block}
+#ts{position:fixed;left:50%;bottom:calc(92px + var(--sb));transform:translateX(-50%);z-index:60;opacity:0;pointer-events:none;background:#000c;border:1px solid #ffffff22;padding:8px 18px;border-radius:999px;font-weight:600;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);white-space:nowrap}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.cd{opacity:1;transform:none}}
+</style></head><body>
+<div id="pl"><div class="plt">index</div><div class="plb"><i></i></div></div>
+<header><a class="logo" href="#/">index</a><input id="sq" type="search" placeholder="Search manga…" autocomplete="off" aria-label="Search"></header>
+<section id="lib" class="view"><div class="hero"><div class="glow"></div><div><h1 id="ht" aria-label="index"></h1><p id="hp"></p></div></div><div class="mq" id="mq"></div>
+<div class="wrap"><div class="sec"><h2>Library</h2><span class="mut" id="cnt"></span></div><div class="grid" id="grid"></div></div></section>
+<section id="det" class="view"></section>
+<div id="rd" data-lenis-prevent><div id="bar"></div>
+<div class="tb t"><button class="ib" id="x" aria-label="Close">✕</button><div class="rt" id="rt"></div></div>
+<div id="pv"></div><div id="sv"></div>
+<div class="tb b"><button class="ib" id="pr" aria-label="Previous page">‹</button><span id="cn"></span><input id="sl" type="range" min="1" value="1" aria-label="Page"><button class="ib" id="nx" aria-label="Next page">›</button><button class="ib" id="md" aria-label="Reading mode">☰</button><button class="ib" id="dr" aria-label="Direction">⇄</button></div></div>
+<div id="ts"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+<script>
+(()=>{
+const D={"title":"index","mangas":[{"id":"m1","title":"nhentai-685584 - [hellaP] Don't Get Caught (Goddess of Victory- Nikke) [English]","cover":"m1-cover.jpg","pages":["m1-001.jpg","m1-002.jpg","m1-003.jpg","m1-004.jpg","m1-005.jpg","m1-006.jpg","m1-007.jpg","m1-008.jpg","m1-009.jpg","m1-010.jpg","m1-011.jpg","m1-012.jpg","m1-013.jpg","m1-014.jpg","m1-015.jpg","m1-016.jpg","m1-017.jpg","m1-018.jpg","m1-019.jpg","m1-020.jpg","m1-021.jpg","m1-022.jpg","m1-023.jpg","m1-024.jpg","m1-025.jpg","m1-026.jpg","m1-027.jpg","m1-028.jpg","m1-029.jpg"]},{"id":"m2","title":"nhentai-685699 - [Nyaa no Esa] Kanojo wa mada 18cm Ijou o Shiranai. - She has never experienced anything close to 18","cover":"m2-cover.jpg","pages":["m2-001.jpg","m2-002.jpg","m2-003.jpg","m2-004.jpg","m2-005.jpg","m2-006.jpg","m2-007.jpg","m2-008.jpg","m2-009.jpg","m2-010.jpg","m2-011.jpg","m2-012.jpg","m2-013.jpg","m2-014.jpg","m2-015.jpg","m2-016.jpg","m2-017.jpg","m2-018.jpg","m2-019.jpg","m2-020.jpg","m2-021.jpg","m2-022.jpg","m2-023.jpg","m2-024.jpg","m2-025.jpg","m2-026.jpg","m2-027.jpg","m2-028.jpg","m2-029.jpg","m2-030.jpg","m2-031.jpg","m2-032.jpg","m2-033.jpg","m2-034.jpg","m2-035.jpg","m2-036.jpg","m2-037.jpg","m2-038.jpg","m2-039.jpg","m2-040.jpg","m2-041.jpg","m2-042.jpg","m2-043.jpg","m2-044.jpg","m2-045.jpg","m2-046.jpg","m2-047.jpg","m2-048.jpg","m2-049.jpg","m2-050.jpg","m2-051.jpg","m2-052.jpg","m2-053.jpg","m2-054.jpg"]},{"id":"m3","title":"nhentai-685779 - [Myoung] Noa is stuck inside the locker","cover":"m3-cover.jpg","pages":["m3-001.jpg","m3-002.jpg","m3-003.jpg"]},{"id":"m4","title":"nhentai-685799 - [Botsuraku Kizoku (Winter)] Ketsuge Haeteru Kaisha no Senpai to Umi ni Iku Hanashi [Chinese] [Decens","cover":"m4-cover.jpg","pages":["m4-001.jpg","m4-002.jpg","m4-003.jpg","m4-004.jpg","m4-005.jpg","m4-006.jpg","m4-007.jpg","m4-008.jpg","m4-009.jpg","m4-010.jpg","m4-011.jpg","m4-012.jpg","m4-013.jpg","m4-014.jpg","m4-015.jpg","m4-016.jpg","m4-017.jpg","m4-018.jpg","m4-019.jpg","m4-020.jpg","m4-021.jpg","m4-022.jpg","m4-023.jpg","m4-024.jpg","m4-025.jpg","m4-026.jpg","m4-027.jpg","m4-028.jpg","m4-029.jpg","m4-030.jpg","m4-031.jpg","m4-032.jpg","m4-033.jpg","m4-034.jpg","m4-035.jpg"]},{"id":"m5","title":"Onna Gal Joushi to Furin suru Hanashi 1 _ Having an Affair with My Blonde Bombshell Boss – Part 1","cover":"m5-cover.jpg","pages":["m5-001.jpg","m5-002.jpg","m5-003.jpg","m5-004.jpg","m5-005.jpg","m5-006.jpg","m5-007.jpg","m5-008.jpg","m5-009.jpg","m5-010.jpg","m5-011.jpg","m5-012.jpg","m5-013.jpg","m5-014.jpg","m5-015.jpg","m5-016.jpg","m5-017.jpg","m5-018.jpg","m5-019.jpg","m5-020.jpg","m5-021.jpg","m5-022.jpg","m5-023.jpg","m5-024.jpg"]},{"id":"m6","title":"Onna Gyaru Joushi to Furin Suru Hanashi 3 _ Having an Affair with My Blonde Bombshell Boss – Part 3","cover":"m6-cover.jpg","pages":["m6-001.jpg","m6-002.jpg","m6-003.jpg","m6-004.jpg","m6-005.jpg","m6-006.jpg","m6-007.jpg","m6-008.jpg","m6-009.jpg","m6-010.jpg","m6-011.jpg","m6-012.jpg","m6-013.jpg","m6-014.jpg","m6-015.jpg","m6-016.jpg","m6-017.jpg","m6-018.jpg","m6-019.jpg","m6-020.jpg","m6-021.jpg","m6-022.jpg","m6-023.jpg","m6-024.jpg","m6-025.jpg","m6-026.jpg","m6-027.jpg","m6-028.jpg","m6-029.jpg"]},{"id":"m7","title":"An Adult At My Mercy_ My Friends Mommy Used To Be In AV","cover":"m7-cover.jpg","pages":["m7-001.jpg","m7-002.jpg","m7-003.jpg","m7-004.jpg","m7-005.jpg","m7-006.jpg","m7-007.jpg","m7-008.jpg","m7-009.jpg","m7-010.jpg","m7-011.jpg","m7-012.jpg","m7-013.jpg","m7-014.jpg","m7-015.jpg","m7-016.jpg","m7-017.jpg","m7-018.jpg","m7-019.jpg","m7-020.jpg","m7-021.jpg","m7-022.jpg","m7-023.jpg","m7-024.jpg","m7-025.jpg","m7-026.jpg","m7-027.jpg","m7-028.jpg","m7-029.jpg","m7-030.jpg","m7-031.jpg","m7-032.jpg","m7-033.jpg","m7-034.jpg","m7-035.jpg","m7-036.jpg","m7-037.jpg","m7-038.jpg","m7-039.jpg","m7-040.jpg","m7-041.jpg","m7-042.jpg","m7-043.jpg","m7-044.jpg","m7-045.jpg","m7-046.jpg"]},{"id":"m8","title":"DeliHeal Kaa-chan 3 ~Daisuki na Kaa-chan to Yari Makuri Handousei Seikatsu~ _ Call Girl Mom 3_ Non-Stop Fucking With My Beloved Mom in Our Almost Live-in Sex Life","cover":"m8-cover.jpg","pages":["m8-001.jpg","m8-002.jpg","m8-003.jpg","m8-004.jpg","m8-005.jpg","m8-006.jpg","m8-007.jpg","m8-008.jpg","m8-009.jpg","m8-010.jpg","m8-011.jpg","m8-012.jpg","m8-013.jpg","m8-014.jpg","m8-015.jpg","m8-016.jpg","m8-017.jpg","m8-018.jpg","m8-019.jpg","m8-020.jpg","m8-021.jpg","m8-022.jpg","m8-023.jpg","m8-024.jpg","m8-025.jpg","m8-026.jpg","m8-027.jpg","m8-028.jpg","m8-029.jpg","m8-030.jpg","m8-031.jpg","m8-032.jpg","m8-033.jpg","m8-034.jpg","m8-035.jpg","m8-036.jpg","m8-037.jpg","m8-038.jpg","m8-039.jpg","m8-040.jpg","m8-041.jpg","m8-042.jpg","m8-043.jpg","m8-044.jpg","m8-045.jpg","m8-046.jpg","m8-047.jpg","m8-048.jpg","m8-049.jpg","m8-050.jpg","m8-051.jpg","m8-052.jpg","m8-053.jpg","m8-054.jpg","m8-055.jpg","m8-056.jpg","m8-057.jpg"]}]},$=s=>document.querySelector(s),E='cubic-bezier(.22,1,.36,1)';
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const L=(k,v)=>{try{return v===undefined?localStorage.getItem(k):localStorage.setItem(k,v)}catch(e){return null}};
+const K=m=>'mg:'+D.title+':'+m.id,rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+D.mangas.forEach(m=>m.cover=m.cover||m.pages[0]);
+const lib=$('#lib'),det=$('#det'),rd=$('#rd'),pv=$('#pv'),sv=$('#sv'),hd=$('header'),sl=$('#sl'),sq=$('#sq');
+let lenis=null,R={m:null,i:0,mode:L('md')==='scroll'?'scroll':'paged',rtl:L('rt')==='1'},startAt=null,nav=0,swiped=false,so=null;
+const ST=window.gsap&&window.ScrollTrigger,G=!rm&&window.gsap;if(ST)gsap.registerPlugin(ScrollTrigger);
+if(!rm&&window.Lenis){lenis=new Lenis({duration:1.15});
+ if(ST){lenis.on('scroll',ScrollTrigger.update);gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0)}
+ else{const f=t=>{lenis.raf(t);requestAnimationFrame(f)};requestAnimationFrame(f)}}
+if(G&&ST)gsap.to('.hero h1',{yPercent:35,opacity:.15,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+const prog=m=>{const v=+L(K(m));return v>0?Math.min(100,(v+1)/m.pages.length*100):0};
+const io='IntersectionObserver' in window?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -6% 0px'}):null;
+function toast(t){const e=$('#ts');e.textContent=t;e.animate([{opacity:0,transform:'translate(-50%,10px)'},{opacity:1,transform:'translate(-50%,0)',offset:.15},{opacity:1,transform:'translate(-50%,0)',offset:.8},{opacity:0,transform:'translate(-50%,-6px)'}],{duration:1800})}
+$('#ht').innerHTML=[...D.title].map((c,i)=>'<span style="--i:'+i+'">'+(c===' '?'&nbsp;':esc(c))+'</span>').join('');
+$('#hp').textContent=D.mangas.length+' series · '+D.mangas.reduce((a,m)=>a+m.pages.length,0)+' pages';
+{const t=D.mangas.map(m=>esc(m.title)).join('<i>✦</i>')+'<i>✦</i>',u=t.repeat(Math.max(2,Math.ceil(12/Math.max(1,D.mangas.length))));$('#mq').innerHTML='<div>'+u+u+'</div>'}
+const hero=$('.hero');hero.addEventListener('pointermove',e=>{const r=hero.getBoundingClientRect();hero.style.setProperty('--mx',(e.clientX-r.left)+'px');hero.style.setProperty('--my',(e.clientY-r.top)+'px')});
+function renderLib(q){q=(q||'').toLowerCase();const g=$('#grid'),ms=D.mangas.filter(m=>m.title.toLowerCase().includes(q));$('#cnt').textContent=ms.length+' title'+(ms.length===1?'':'s');
+ g.innerHTML=ms.map((m,i)=>{const p=prog(m);return '<a class="cd" href="#/m/'+m.id+'" style="--i:'+(i%6)+'"><div class="cv"><img alt="'+esc(m.title)+'" loading="lazy" decoding="async" src="'+m.cover+'">'+(p?'<i class="pb" style="--p:'+p+'%"></i>':'')+'</div><div class="tt">'+esc(m.title)+'<small>'+m.pages.length+' pages'+(p?' · '+Math.round(p)+'% read':'')+'</small></div></a>'}).join('')||'<p class="mut">No manga found.</p>';
+ g.querySelectorAll('img').forEach(im=>{const ok=()=>{im.classList.add('ok');im.parentNode.classList.add('ok')};im.complete&&im.naturalWidth?ok():(im.onload=ok,im.onerror=ok)});
+ g.querySelectorAll('.cd').forEach(c=>io?io.observe(c):c.classList.add('in'));
+ if(window.VanillaTilt&&matchMedia('(hover:hover)').matches&&!rm)VanillaTilt.init(g.querySelectorAll('.cv'),{max:9,speed:500,glare:true,'max-glare':.22,scale:1.02})}
+function view(t){const o=t===lib?det:lib;if(t.classList.contains('on')&&!o.classList.contains('on'))return;o.classList.remove('on');t.classList.add('on');hd.classList.remove('h');scrollTo(0,0);lenis&&lenis.scrollTo(0,{immediate:true});
+ if(G)gsap.fromTo(t,{opacity:0,y:28},{opacity:1,y:0,duration:.75,ease:'power3.out',clearProps:'opacity,transform'});ST&&ScrollTrigger.refresh()}
+function showDet(m){const p=+L(K(m))||0,h='#/r/'+m.id;
+ det.innerHTML='<div class="dt"><div class="cv ok"><img class="ok" src="'+m.cover+'" alt=""></div><div><h1>'+esc(m.title)+'</h1><div class="meta">'+m.pages.length+' pages</div><div class="br">'+(p>0?'<a class="btn p" href="'+h+'">▶ Continue · p.'+(p+1)+'</a>':'')+'<a class="btn'+(p>0?'':' p')+'" id="b0" href="'+h+'">'+(p>0?'↺ Start over':'▶ Start reading')+'</a></div><h3>Jump to page</h3><div class="chs">'+m.pages.map((_,i)=>'<button class="ch" data-i="'+i+'">'+(i+1)+'</button>').join('')+'</div></div></div>';
+ $('#b0').onclick=()=>{startAt=0};
+ det.querySelector('.chs').onclick=e=>{const b=e.target.closest('button');if(b){startAt=+b.dataset.i;location.hash=h}};view(det)}
+function upd(){const n=R.m.pages.length;$('#cn').textContent=(R.i+1)+' / '+n;sl.value=R.i+1;$('#bar').style.width=((R.i+1)/n*100)+'%';L(K(R.m),R.i);
+ for(const k of [R.i+1,R.i+2,R.i-1])if(R.m.pages[k])new Image().src=R.m.pages[k]}
+function show(i,d){const a=[...pv.children],old=a[a.length-1];a.slice(0,-1).forEach(x=>x.remove());
+ const im=new Image();im.alt='';im.draggable=false;im.src=R.m.pages[i];pv.classList.remove('ld');im.onload=()=>pv.classList.add('ld');pv.appendChild(im);
+ const dx=d*Math.min(120,innerWidth*.25);
+ if(d&&!rm){im.animate([{opacity:0,transform:'translateX('+dx+'px) scale(.98)'},{opacity:1,transform:'none'}],{duration:450,easing:E});
+  if(old){const f=old.style.transform||'none';old.style.transform='';old.animate([{opacity:1,transform:f},{opacity:0,transform:'translateX('+(-dx)+'px) scale(.98)'}],{duration:350,easing:E,fill:'forwards'}).onfinish=()=>old.remove()}}
+ else if(old)old.remove();
+ R.i=i;upd()}
+function buildScroll(){sv.innerHTML=R.m.pages.map((p,i)=>'<img loading="lazy" decoding="async" alt="" data-i="'+i+'" src="'+p+'">').join('');
+ so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){R.i=+e.target.dataset.i;upd()}}),{root:sv,rootMargin:'-50% 0px -50% 0px'});
+ [...sv.children].forEach(im=>{im.onload=()=>im.classList.add('ok');so.observe(im)})}
+function setMode(mo){R.mode=mo;L('md',mo);rd.classList.remove('paged','scroll');rd.classList.add(mo);$('#md').textContent=mo==='paged'?'☰':'▭';
+ pv.innerHTML='';sv.innerHTML='';if(so){so.disconnect();so=null}
+ if(mo==='paged')show(R.i,0);else{buildScroll();const t=sv.children[R.i];if(t){sv.style.scrollBehavior='auto';t.scrollIntoView({block:'start'});sv.style.scrollBehavior=''}upd()}}
+function openRd(m){const was=rd.classList.contains('on');R.m=m;let i=startAt!=null?startAt:(+L(K(m))||0);startAt=null;R.i=Math.max(0,Math.min(m.pages.length-1,i));
+ rd.classList.remove('ui-off');rd.classList.add('on');$('#rt').textContent=m.title;sl.max=m.pages.length;sl.style.direction=R.rtl?'rtl':'ltr';
+ lenis&&lenis.stop();document.documentElement.style.overflow='hidden';setMode(R.mode);
+ if(!was&&!rm)rd.animate([{clipPath:'circle(0% at 50% 100%)'},{clipPath:'circle(150% at 50% 100%)'}],{duration:750,easing:'cubic-bezier(.77,0,.175,1)'})}
+function closeRd(){if(!rd.classList.contains('on'))return;rd.classList.remove('on');pv.innerHTML='';sv.innerHTML='';so&&so.disconnect();lenis&&lenis.start();document.documentElement.style.overflow=''}
+function go(s){const n=R.m.pages.length,j=R.i+s;
+ if(j<0||j>=n){pv.animate([{transform:'none'},{transform:'translateX('+(s>0?-14:14)+'px)'},{transform:'none'}],{duration:260});toast(j<0?'First page':'End · '+R.m.title);return}
+ if(R.mode==='paged')show(j,s*(R.rtl?-1:1));else{const t=sv.children[j];t&&t.scrollIntoView({behavior:'smooth',block:'start'})}}
+function route(){nav++;const h=location.hash.split('/'),m=D.mangas.find(x=>x.id===h[2]);
+ if(h[1]==='r'&&m){openRd(m);return}
+ closeRd();if(h[1]==='m'&&m)showDet(m);else{renderLib(sq.value);view(lib)}}
+const closeBtn=()=>{nav>1?history.back():location.hash='#/m/'+R.m.id};
+$('#x').onclick=closeBtn;$('#pr').onclick=()=>go(R.rtl?1:-1);$('#nx').onclick=()=>go(R.rtl?-1:1);
+$('#md').onclick=()=>{setMode(R.mode==='paged'?'scroll':'paged');toast(R.mode==='paged'?'Page mode':'Scroll mode')};
+$('#dr').onclick=()=>{R.rtl=!R.rtl;L('rt',R.rtl?'1':'0');sl.style.direction=R.rtl?'rtl':'ltr';toast(R.rtl?'Right to left (manga)':'Left to right')};
+sl.oninput=()=>{const i=+sl.value-1;if(R.mode==='paged')show(i,0);else{const t=sv.children[i];t&&t.scrollIntoView({block:'start'})}};
+const tap=e=>{if(swiped||(window.visualViewport&&visualViewport.scale>1.02))return;const x=e.clientX/innerWidth;
+ if(R.mode==='paged'&&x<.3)go(R.rtl?1:-1);else if(R.mode==='paged'&&x>.7)go(R.rtl?-1:1);else rd.classList.toggle('ui-off')};
+pv.onclick=tap;sv.onclick=tap;
+let tx=null,ty=0,dx=0,drag=false;
+pv.addEventListener('touchstart',e=>{if(e.touches.length!==1||(window.visualViewport&&visualViewport.scale>1.02)){tx=null;return}tx=e.touches[0].clientX;ty=e.touches[0].clientY;dx=0;drag=false},{passive:true});
+pv.addEventListener('touchmove',e=>{if(tx==null)return;dx=e.touches[0].clientX-tx;if(!drag&&Math.abs(dx)>10&&Math.abs(dx)>Math.abs(e.touches[0].clientY-ty))drag=true;const im=pv.lastElementChild;if(drag&&im)im.style.transform='translateX('+dx*.6+'px)'},{passive:true});
+pv.addEventListener('touchend',()=>{if(tx==null)return;const im=pv.lastElementChild;tx=null;
+ if(drag){swiped=true;setTimeout(()=>swiped=false,350);
+  if(Math.abs(dx)>60)go((dx<0)!==R.rtl?1:-1);
+  else if(im){const f=im.style.transform;im.style.transform='';im.animate([{transform:f},{transform:'none'}],{duration:320,easing:E})}}});
+let ls=0;sv.addEventListener('scroll',()=>{const y=sv.scrollTop,d=y-ls;if(Math.abs(d)>8){rd.classList.toggle('ui-off',d>0&&y>80);ls=y}},{passive:true});
+addEventListener('keydown',e=>{if(!rd.classList.contains('on'))return;const k=e.key;
+ if(k==='Escape')closeBtn();else if(k==='ArrowRight')go(R.rtl?-1:1);else if(k==='ArrowLeft')go(R.rtl?1:-1);else if(k===' '&&R.mode==='paged'){e.preventDefault();go(1)}});
+let ly=0;addEventListener('scroll',()=>{const y=scrollY;hd.classList.toggle('h',y>ly&&y>140);ly=y},{passive:true});
+sq.oninput=()=>{if(location.hash.length>2)location.hash='#/';else renderLib(sq.value)};
+addEventListener('hashchange',route);
+if(!D.mangas.length)$('#grid').innerHTML='<p class="mut">No manga yet.</p>';
+route();
+setTimeout(()=>{const p=$('#pl');p.classList.add('done');setTimeout(()=>p.remove(),1500)},900);
+})();
+</script></body></html>
