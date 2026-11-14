@@ -1,166 +1,177 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#11100f">
-  <title>Manga Shelf</title>
-  <style>
-    :root { color-scheme: dark; --bg:#11100f; --panel:#1b1917; --muted:#aaa39b; --ink:#f4eee6; --accent:#e9a86b; --line:#38332e; }
-    * { box-sizing:border-box }
-    body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif }
-    button { font:inherit; color:inherit }
-    .wrap { width:min(1180px, calc(100% - 40px)); margin-inline:auto }
-    header { padding:54px 0 30px; border-bottom:1px solid var(--line) }
-    .eyebrow { color:var(--accent); text-transform:uppercase; letter-spacing:.18em; font-size:.75rem; font-weight:700 }
-    h1 { margin:8px 0; font:500 clamp(2.5rem,7vw,5rem)/1.02 Georgia,serif; letter-spacing:-.04em }
-    header p { color:var(--muted); margin:12px 0 0 }
-    .shelf-heading { display:flex; align-items:baseline; justify-content:space-between; margin:28px 0 16px }
-    h2 { font:500 1.55rem Georgia,serif; margin:0 }
-    .count { color:var(--muted); font-size:.9rem }
-    ol.shelf { list-style:none; margin:0 0 60px; padding:0; display:grid; grid-template-columns:repeat(auto-fill,minmax(175px,1fr)); gap:22px }
-    .card { overflow:hidden; background:var(--panel); border:1px solid var(--line); border-radius:9px; transition:transform .18s,border-color .18s }
-    .card:hover { transform:translateY(-3px); border-color:#74604d }
-    .open-card { display:block; width:100%; padding:0; border:0; background:none; text-align:left; cursor:pointer }
-    .cover { display:block; width:100%; aspect-ratio: .72; object-fit:cover; background:#26221e }
-    .card-info { padding:13px 14px 15px }
-    .card-title { display:block; font:500 1.2rem Georgia,serif }
-    .card-meta { display:block; color:var(--muted); font-size:.85rem; margin-top:4px }
-    .reader { position:fixed; inset:0; z-index:5; display:none; background:#0b0b0b; height:100vh; height:100dvh }
-    .reader.active { display:flex; flex-direction:column }
-    .toolbar { flex:none; min-height:58px; display:flex; align-items:center; justify-content:space-between; gap:12px; padding:8px clamp(12px,3vw,30px); padding-top:max(8px, env(safe-area-inset-top)); background:#171615; border-bottom:1px solid #34312e; z-index:2 }
-    .toolbar-group { display:flex; align-items:center; gap:9px }
-    .tool-btn { border:1px solid #47413b; background:#24211e; padding:8px 12px; border-radius:6px; cursor:pointer }
-    .tool-btn:hover { border-color:var(--accent) }
-    .tool-btn:disabled { opacity:.4; cursor:not-allowed }
-    .reader-label { min-width:0 }
-    .reader-label strong { display:block; font:500 1.05rem Georgia,serif }
-    .reader-label span { color:var(--muted); font-size:.8rem }
-    .pages { flex:1; min-height:0; overflow:auto; overscroll-behavior:contain; -webkit-overflow-scrolling:touch; text-align:center; scroll-behavior:smooth; touch-action:pan-y }
-    .page { display:block; width:min(100%, 900px); max-width:100%; height:auto; margin:0 auto; background:#191919 }
-    .pages.fit-screen .page { width:auto; max-width:100%; height:auto; max-height:calc(100dvh - var(--toolbar-height, 58px)); object-fit:contain }
-    .page[ loading="lazy"] { min-height:60vh }
-    @media(max-width:700px) {
-      .wrap { width:calc(100% - 28px) }
-      header { padding:clamp(28px,8vw,42px) 0 24px }
-      ol.shelf { grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(10px,3vw,16px) }
-      .card { border-radius:7px }
-      .card-info { padding:10px 11px 12px }
-      .card-title { font-size:1.08rem }
-      .toolbar { min-height:0; display:grid; grid-template-columns:1fr auto; gap:6px; padding:8px 10px; padding-top:max(8px,env(safe-area-inset-top)) }
-      .toolbar-group { gap:6px }
-      .toolbar-group:last-child { grid-column:1 / -1; justify-content:space-between }
-      .toolbar-group:last-child .tool-btn { flex:1 }
-      .tool-btn { min-height:42px; padding:7px 10px; font-size:.86rem; touch-action:manipulation }
-      .reader-label { text-align:right; line-height:1.25 }
-      .reader-label strong { font-size:.98rem }
-      .reader-label span { font-size:.72rem }
-      .page { width:100% }
-      .page[ loading="lazy"] { min-height:45vh }
-    }
-    @media(max-width:390px) {
-      .wrap { width:calc(100% - 20px) }
-      .toolbar { grid-template-columns:1fr auto; padding-inline:6px }
-      .tool-btn { padding-inline:7px; font-size:.8rem }
-      .card-meta { font-size:.78rem }
-    }
-    @media(orientation:landscape) and (max-height:520px) {
-      .toolbar { min-height:46px; padding-block:4px }
-      .tool-btn { min-height:36px; padding-block:4px }
-      .reader-label span { display:none }
-      .pages.fit-screen .page { max-height:calc(100dvh - 46px) }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Backend Explained: The Meditech Kitchen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..600,100;1,9..144,300..500,100&family=Archivo:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.3.11/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+<style>
+:root{--bg:#FAF8F3;--card:#FFFFFF;--ink:#1C2623;--soft:#56645E;--accent:#2F6B57;--hl:#D9E8DF;--sage:#E4EDE7;--line:#1C2623;--rule:#D8DDD6;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#121C18;--card:#1A2722;--ink:#EEF3EF;--soft:#A9B8B0;--accent:#7FC9AA;--hl:#2C4A3E;--sage:#243830;--line:#EEF3EF;--rule:#2E3F37}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#121C18;--card:#1A2722;--ink:#EEF3EF;--soft:#A9B8B0;--accent:#7FC9AA;--hl:#2C4A3E;--sage:#243830;--line:#EEF3EF;--rule:#2E3F37}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+html.lenis,html.lenis body{height:auto}
+html.lenis.lenis-smooth{scroll-behavior:auto!important}
+html.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}
+html.lenis.lenis-stopped{overflow:clip}
+html.lenis.lenis-smooth iframe{pointer-events:none}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 18px/1.7 Archivo,system-ui,sans-serif;padding-bottom:110px;overflow-x:hidden}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;font-variation-settings:"SOFT" 100;font-weight:400;line-height:1.1;margin:0}
+.mono{font-family:"IBM Plex Mono",monospace;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}
+i[data-lucide]{width:1.1em;height:1.1em;vertical-align:-.18em;stroke-width:1.8}
+#bar{position:fixed;top:env(safe-area-inset-top,0px);left:0;height:3px;width:100%;background:var(--ink);transform-origin:0 50%;transform:scaleX(0);z-index:20}
+header{max-width:900px;margin:0 auto;padding:18vh 24px 10vh}
+header h1{font-size:clamp(2.8rem,9vw,6rem);letter-spacing:-.02em;margin:14px 0 22px}
+header h1 em{font-style:italic;font-weight:300}
+header p{max-width:480px;color:var(--soft);font-size:1.15rem}
+section{max-width:900px;margin:0 auto;padding:12vh 24px;border-top:1px solid var(--rule);display:grid;grid-template-columns:150px 1fr;gap:20px 40px}
+section>.mono{position:sticky;top:calc(24px + env(safe-area-inset-top,0px));align-self:start}
+h2{font-size:clamp(2rem,5vw,3.2rem);margin-bottom:22px}
+.say{font:300 clamp(1.5rem,3.4vw,2.2rem)/1.35 Fraunces,serif;margin:0 0 34px}
+.hl{color:inherit;font-style:italic;transition:color .8s}.hl.on{color:var(--accent)}::selection{background:var(--accent);color:var(--bg)}
+.dim{color:var(--soft)}
+.list{display:grid}
+.item{display:grid;grid-template-columns:1fr;padding:22px 0;border-bottom:1px solid var(--rule);cursor:default;transition:padding .3s}
+.item h3{font-size:1.35rem;display:flex;gap:12px;align-items:center}
+.item p{margin:6px 0 0;color:var(--soft);max-width:520px}
+.item .real{font-size:.9rem;color:var(--ink);opacity:.75;margin-top:2px}
+.item:hover{padding-left:14px}
+.item h3 code,.row code{font-family:"IBM Plex Mono",monospace;font-size:.85rem;background:var(--sage);padding:2px 8px;border-radius:6px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.tab{cursor:pointer;font:500 .9rem Archivo;color:var(--soft);background:none;border:1px solid var(--rule);border-radius:99px;padding:6px 16px}
+.tab.on{color:var(--ink);border-color:var(--ink);background:var(--card)}
+.track{display:flex;gap:6px;margin:6px 0 20px}
+.step{flex:1;text-align:center;padding:14px 4px;border-top:2px solid var(--rule);color:var(--soft);transition:.5s;font-size:.85rem}
+.step i{display:block;margin:0 auto 6px;width:22px;height:22px}
+.step.on{border-color:var(--ink);color:var(--ink)}
+.btn{cursor:pointer;font:500 1rem Archivo;color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:99px;padding:10px 22px;display:inline-flex;gap:8px;align-items:center}
+.btn:hover{background:var(--hl)}
+#story{min-height:3.4em;font:300 1.3rem/1.4 Fraunces,serif;margin-bottom:16px}
+.row{display:grid;grid-template-columns:1fr 1.5fr;gap:14px;padding:16px 0;border-bottom:1px solid var(--rule)}
+.row span{color:var(--soft)}.row b{display:block;color:var(--ink);font-weight:500}
+.n{font:300 2rem Fraunces,serif;color:var(--soft);min-width:44px}
+.item.flex{grid-template-columns:auto 1fr;align-items:baseline}
+.big{max-width:900px;margin:0 auto;padding:12vh 24px;border-top:1px solid var(--rule)}
+.big p{font:300 clamp(1.7rem,4.6vw,3rem)/1.25 Fraunces,serif;margin:0}
+@media(max-width:720px){section{grid-template-columns:1fr;gap:6px}section>.mono{position:static}.row{grid-template-columns:1fr}}
+body{padding-bottom:40px}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
 </head>
 <body>
-  <main class="wrap">
-    <header>
-      <div class="eyebrow">Your collection</div>
-      <h1>Manga Shelf</h1>
-      <p>Pick a volume to start reading. Pages are arranged in numerical order.</p>
-    </header>
-    <section aria-labelledby="shelf-heading">
-      <div class="shelf-heading"><h2 id="shelf-heading">Volumes</h2><span class="count" id="volume-count"></span></div>
-      <ol class="shelf" id="shelf"></ol>
-    </section>
-  </main>
-  <section class="reader" id="reader" aria-label="Manga reader" aria-hidden="true">
-    <nav class="toolbar" aria-label="Reader controls">
-      <div class="toolbar-group"><button class="tool-btn" id="close" type="button" title="Close reader (Escape)">← Shelf</button></div>
-      <div class="reader-label"><strong id="reader-title"></strong><span id="page-count">Scroll to read</span></div>
-      <div class="toolbar-group">
-        <button class="tool-btn" id="fit-toggle" type="button" aria-pressed="false" title="Toggle fit screen mode">Fit screen</button>
-        <button class="tool-btn" id="prev-volume" type="button" aria-label="Previous volume">‹ Prev</button>
-        <button class="tool-btn" id="next-volume" type="button" aria-label="Next volume">Next ›</button>
-      </div>
-    </nav>
-    <div class="pages" id="pages" tabindex="0" aria-label="Manga pages"></div>
-  </section>
-  <script>
-    // Image files in this folder follow m<number>-<page>.jpg; covers are m<number>-cover.jpg.
-    const volumes = [
-      { id: 1, pages: 29 }, { id: 2, pages: 54 }, { id: 3, pages: 3 }, { id: 4, pages: 35 },
-      { id: 5, pages: 24 }, { id: 6, pages: 29 }, { id: 7, pages: 46 }, { id: 8, pages: 57 }
-    ];
-    const shelf = document.querySelector('#shelf');
-    const reader = document.querySelector('#reader');
-    const pages = document.querySelector('#pages');
-    let current = 0;
-    const pad = n => String(n).padStart(3, '0');
+<div id="bar"></div>
+<header>
+  <p class="mono">A backend, explained with food</p>
+  <h1 id="t">Every app has<br>a <em>kitchen.</em></h1>
+  <p>You never see it, but it cooks everything. Here is Meditech’s kitchen, with no coding required.</p>
+</header>
 
-    document.querySelector('#volume-count').textContent = `${volumes.length} volumes`;
-    volumes.forEach((volume, index) => {
-      const item = document.createElement('li');
-      item.className = 'card';
-      const button = document.createElement('button');
-      button.type = 'button'; button.className = 'open-card';
-      button.setAttribute('aria-label', `Read Manga ${volume.id}, ${volume.pages} pages`);
-      const cover = document.createElement('img');
-      cover.className = 'cover'; cover.src = `m${volume.id}-cover.jpg`; cover.alt = `Manga ${volume.id} cover`; cover.loading = 'lazy';
-      const info = document.createElement('span'); info.className = 'card-info';
-      info.innerHTML = `<span class="card-title">Manga ${volume.id}</span><span class="card-meta">${volume.pages} pages</span>`;
-      button.append(cover, info); button.addEventListener('click', () => openVolume(index));
-      item.append(button); shelf.append(item);
-    });
+<section><p class="mono">01 · The cast</p><div>
+  <h2>An app is a restaurant</h2>
+  <p class="say">The <span class="hl">frontend</span> is the dining room. The <span class="hl">backend</span> is the kitchen. The <span class="hl">API</span> is the waiter, and the <span class="hl">AI</span> is the chef.</p>
+  <div class="list">
+    <div class="item r"><h3><i data-lucide="armchair"></i>Frontend</h3><p>The page you see: menu, form, buttons. Pretty, but it cannot cook a thing.</p></div>
+    <div class="item r"><h3><i data-lucide="cooking-pot"></i>Backend</h3><p>The hidden work area where orders become results.</p></div>
+    <div class="item r"><h3><i data-lucide="hand-platter"></i>API</h3><p>Carries your request to the kitchen and brings the answer back.</p></div>
+    <div class="item r"><h3><i data-lucide="brain"></i>The AI (Ollama)</h3><p>Writes the health answer, following the house rulebook.</p></div>
+  </div></div></section>
 
-    function openVolume(index) {
-      current = index;
-      const volume = volumes[current];
-      document.querySelector('#reader-title').textContent = `Manga ${volume.id}`;
-      document.querySelector('#page-count').textContent = `${volume.pages} pages · scroll to read`;
-      document.querySelector('#prev-volume').disabled = current === 0;
-      document.querySelector('#next-volume').disabled = current === volumes.length - 1;
-      pages.classList.remove('fit-screen');
-      const fitToggle = document.querySelector('#fit-toggle');
-      fitToggle.setAttribute('aria-pressed', 'false'); fitToggle.textContent = 'Fit screen';
-      pages.replaceChildren();
-      for (let n = 1; n <= volume.pages; n++) {
-        const image = document.createElement('img');
-        image.className = 'page'; image.src = `m${volume.id}-${pad(n)}.jpg`;
-        image.alt = `Manga ${volume.id}, page ${n}`; image.loading = n < 3 ? 'eager' : 'lazy';
-        pages.append(image);
-      }
-      reader.classList.add('active'); reader.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden'; pages.scrollTop = 0;
-      document.querySelector('#close').focus();
-    }
-    function closeReader() {
-      reader.classList.remove('active'); reader.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = ''; pages.replaceChildren();
-    }
-    document.querySelector('#close').addEventListener('click', closeReader);
-    document.querySelector('#prev-volume').addEventListener('click', () => { if (current > 0) openVolume(current - 1); });
-    document.querySelector('#next-volume').addEventListener('click', () => { if (current < volumes.length - 1) openVolume(current + 1); });
-    document.querySelector('#fit-toggle').addEventListener('click', event => {
-      const fit = pages.classList.toggle('fit-screen');
-      event.currentTarget.setAttribute('aria-pressed', String(fit));
-      event.currentTarget.textContent = fit ? 'Fit width' : 'Fit screen';
-    });
-    document.addEventListener('keydown', event => {
-      if (event.key === 'Escape' && reader.classList.contains('active')) closeReader();
-      if (reader.classList.contains('active') && event.key === 'ArrowDown') pages.scrollBy({ top: innerHeight * .8, behavior: 'smooth' });
-      if (reader.classList.contains('active') && event.key === 'ArrowUp') pages.scrollBy({ top: -innerHeight * .8, behavior: 'smooth' });
-    });
-  </script>
+<section id="journey"><p class="mono">02 · One question</p><div>
+  <h2>Follow an order</h2>
+  <p class="say dim">Press the button and watch it travel.</p>
+  <div class="track" id="track">
+    <div class="step"><i data-lucide="keyboard"></i>You type</div>
+    <div class="step"><i data-lucide="footprints"></i>Waiter runs</div>
+    <div class="step"><i data-lucide="siren"></i>Safety check</div>
+    <div class="step"><i data-lucide="brain"></i>Chef cooks</div>
+    <div class="step"><i data-lucide="smile"></i>You read</div>
+  </div>
+  <div id="story">Ready when you are…</div>
+  <button class="btn" id="go"><i data-lucide="play"></i> Send the order</button></div></section>
+
+<section><p class="mono">03 · The files</p><div>
+  <h2>Who does what</h2>
+  <p class="say">Every file is <span class="hl">a worker</span> with one job.</p>
+  <div class="tabs" id="tabs"><button class="tab on" data-f="all">Everyone</button><button class="tab" data-f="front">Dining room</button><button class="tab" data-f="kitchen">Kitchen</button><button class="tab" data-f="extra">Supporting cast</button></div>
+  <div class="list" id="fl"></div></div></section>
+
+<section><p class="mono">04 · The menu</p><div>
+  <h2>The waiter’s menu</h2>
+  <p class="say">Each address is <span class="hl">a dish you can order.</span></p>
+  <div id="mn"></div></div></section>
+
+<section><p class="mono">05 · The recipe</p><div>
+  <h2>Build one in five steps</h2>
+  <p class="say">Every backend on Earth <span class="hl">follows this recipe.</span></p>
+  <div class="list" id="rc"></div></div></section>
+
+<section><p class="mono">06 · Safety</p><div>
+  <h2>Before serving</h2>
+  <div class="list">
+    <div class="item r"><h3><i data-lucide="stethoscope"></i>Not a doctor</h3><p>General info only. Ask a pharmacist about medicines; AI can be wrong.</p></div>
+    <div class="item r"><h3><i data-lucide="lock-keyhole-open"></i>No lock on the notebook</h3><p>Memory is plain text. Use pretend data until real security is added.</p></div>
+    <div class="item r"><h3><i data-lucide="phone-call"></i>Emergency?</h3><p>Skip the app and call your local emergency number.</p></div>
+  </div></div></section>
+
+<div class="big"><p>The frontend is the dining room, the backend is the kitchen, <span class="hl">the API is the waiter</span>, and the AI is the chef, with <span class="hl">a smoke alarm</span> bolted to the wall.</p></div>
+
+<div id="player">
+  <div id="hint">Tap play. The sound fades in slowly.</div>
+  <div class="cov"><i data-lucide="leaf"></i></div>
+  <div class="ti"><b>Slow Breathing (Ambient)</b><small>Generated live</small></div>
+  <button id="pp" aria-label="Play"><i data-lucide="play"></i></button>
+  <time id="el">0:00</time>
+  <div class="tr"><i id="dot"></i></div>
+  <time id="rem">-20:00</time>
+  <input id="vol" type="range" min="0" max="100" value="45" aria-label="Volume">
+  <button id="x" aria-label="Close player"><i data-lucide="x"></i></button>
+  <button id="mic" title="Quietly follows how loud your room is (asks for microphone)">Room-aware</button>
+</div>
+
+<script>
+const F=[["front","index.html","The menu and order form","A box to type, a language dropdown, a button.","The printed menu"],["front","styles.css","The decorator","Colors, fonts and spacing. All looks, no thinking.","Paint and flowers"],["kitchen","run.py","The key in the front door","Run it and the whole restaurant opens.","The OPEN sign switch"],["kitchen","main.py","The head waiter","Lists every order accepted and sends each to the right worker.","The one who runs the floor"],["kitchen","config.py","The settings board","Which chef, how long answers are, how big the speech model is.","The wall chart"],["kitchen","prompts.py","The chef’s rulebook","Be kind, use simple words, never diagnose, never change doses.","The house recipe book"],["kitchen","safety.py","The smoke alarm","Spots danger phrases in many languages and shouts for help instantly.","A fire alarm, independent of the chef"],["kitchen","services.py","The phone to the chef","Code that talks to Ollama and keeps the line open.","The kitchen hotline"],["kitchen","schemas.py","The order-form rules","No empty questions, no million-word essays.","The bouncer checking paperwork"],["kitchen","memory.py","The regulars notebook","Only if you opt in, it recalls up to three similar past chats.","A waiter who remembers your usual"],["kitchen","speech.py","The ear","Turns a voice recording into written words.","Someone writing down your spoken order"],["extra","requirements.txt","The shopping list","Every tool the kitchen needs installed.","Groceries"],["extra",".env.example","Settings template","Copy it to .env and add your own choices.","A blank order pad"],["extra","README.md","Instruction manuals","Step-by-step setup notes.","The staff handbook"]];
+const M=[["/api/chat","Answers a health question","Ordering the main dish"],["/api/explain","Explains a medical term or report","What’s in this sauce?"],["/api/prescription","Explains prescription wording, never invents doses","Reading the label aloud"],["/api/transcribe","Voice recording to text","Dictating your order"],["/api/memory","See or delete saved memory","Burning your notebook page"],["/health","Checks the kitchen is awake","Is anyone back there?"]];
+const R=[["Decide the menu","What can people ask for?"],["Write the order forms","Define a valid request (schemas.py)."],["Hire the workers","Code that does the real job (services.py)."],["Hire the waiter","Connect each dish to its worker (main.py)."],["Open the doors","Start it up (run.py)."]];
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+$("#fl").innerHTML=F.map(f=>`<div class="item r file" data-g="${f[0]}"><h3><code>${f[1]}</code>${f[2]}</h3><p>${f[3]}</p><p class="real">In real life: ${f[4]}</p></div>`).join("");
+$("#mn").innerHTML=M.map(m=>`<div class="row r"><code>${m[0]}</code><span><b>${m[1]}</b>${m[2]}</span></div>`).join("");
+$("#rc").innerHTML=R.map((r,i)=>`<div class="item flex r"><span class="n">${i+1}</span><div><h3>${r[0]}</h3><p>${r[1]}</p></div></div>`).join("");
+lucide.createIcons();
+$("#tabs").onclick=e=>{const t=e.target.closest(".tab");if(!t)return;$$(".tab").forEach(x=>x.classList.toggle("on",x===t));
+ $$(".file").forEach(f=>{const s=t.dataset.f==="all"||f.dataset.g===t.dataset.f;f.style.display=s?"":"none";if(s)gsap.fromTo(f,{y:10,opacity:0},{y:0,opacity:1,duration:.5})});ScrollTrigger.refresh()};
+const msgs=["You type: “What does this medicine label mean?”","The waiter takes your note and walks to the kitchen.","The smoke alarm checks for emergency words. All calm.","The chef reads the rulebook and writes a simple, kind answer.","Your plate arrives: a plain answer in your language."];
+let busy=false;$("#go").onclick=async()=>{if(busy)return;busy=true;const s=$$(".step");s.forEach(x=>x.classList.remove("on"));
+ for(let i=0;i<s.length;i++){s[i].classList.add("on");$("#story").textContent=msgs[i];await new Promise(r=>setTimeout(r,1400))}busy=false};
+/* scroll polish */
+gsap.registerPlugin(ScrollTrigger);
+const calm=matchMedia("(prefers-reduced-motion:reduce)").matches;
+
+/* Lenis smooth scrolling, synchronized with GSAP */
+let lenis;
+if(!calm && typeof Lenis!=="undefined"){
+  lenis=new Lenis({
+    lerp:0.085,
+    wheelMultiplier:1,
+    smoothWheel:true,
+    syncTouch:false
+  });
+  lenis.on("scroll",ScrollTrigger.update);
+  gsap.ticker.add(time=>lenis.raf(time*1000));
+  gsap.ticker.lagSmoothing(0);
+}
+gsap.to("#bar",{scaleX:1,ease:"none",scrollTrigger:{scrub:.3,start:0,end:"max"}});
+if(!calm){
+ gsap.from("#t",{y:30,opacity:0,duration:1.4,ease:"power3.out"});
+ $$(".hl").forEach(h=>ScrollTrigger.create({trigger:h,start:"top 75%",onEnter:()=>h.classList.add("on")}));
+ $$(".r").forEach(r=>gsap.fromTo(r,{opacity:.25,y:18},{opacity:1,y:0,ease:"none",scrollTrigger:{trigger:r,start:"top 92%",end:"top 62%",scrub:true}}));
+ $$(".say").forEach(r=>gsap.from(r,{opacity:.2,y:24,ease:"none",scrollTrigger:{trigger:r,start:"top 92%",end:"top 65%",scrub:true}}));
+}else{$$(".hl").forEach(h=>h.classList.add("on"))}
+</script>
 </body>
 </html>
