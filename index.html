@@ -62,6 +62,20 @@ h2{font-size:clamp(2rem,5vw,3.2rem);margin-bottom:22px}
 .big p{font:300 clamp(1.7rem,4.6vw,3rem)/1.25 Fraunces,serif;margin:0}
 @media(max-width:720px){section{grid-template-columns:1fr;gap:6px}section>.mono{position:static}.row{grid-template-columns:1fr}}
 body{padding-bottom:40px}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+/* Quiet entrance and two-step gate */
+#quiet-entry{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:max(14px,env(safe-area-inset-bottom));z-index:30;width:34px;height:34px;border:0;border-radius:50%;background:var(--bg);color:var(--soft);font:400 18px/1 Archivo,system-ui,sans-serif;opacity:.16;cursor:pointer;transition:opacity .25s,background .25s}
+#quiet-entry:hover,#quiet-entry:focus-visible{opacity:.8;background:var(--sage);outline:1px solid var(--rule)}
+#gate{position:fixed;inset:0;z-index:40;display:none;align-items:center;justify-content:center;padding:24px;background:var(--bg);color:var(--ink)}
+#gate.open{display:flex}
+.gate-card{width:min(100%,420px);min-height:300px;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(24px,6vw,40px);background:var(--card);border:1px solid var(--rule);border-radius:18px;box-shadow:0 24px 80px #0002}
+.gate-top{text-align:center}
+.gate-title{font:400 clamp(2rem,9vw,3rem)/1.05 Fraunces,Georgia,serif;letter-spacing:-.025em}
+.gate-nonsense{margin:20px 0 0;color:var(--soft);font:400 1rem/1.7 Archivo,system-ui,sans-serif}
+.gate-form{display:grid;gap:10px;margin-top:32px}
+.gate-input{width:100%;min-height:52px;padding:12px 15px;border:1px solid var(--rule);border-radius:10px;background:var(--bg);color:var(--ink);font:500 1rem "IBM Plex Mono",monospace;outline:none}
+.gate-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 20%,transparent)}
+.gate-error{min-height:1.4em;margin:0;color:#b34a3c;font-size:.85rem;text-align:center}
+@media(max-width:480px){#gate{padding:16px}.gate-card{min-height:270px;border-radius:14px}.gate-nonsense{font-size:.94rem}}
 </style>
 </head>
 <body>
@@ -134,11 +148,40 @@ body{padding-bottom:40px}@media(prefers-reduced-motion:reduce){html{scroll-behav
   <button id="mic" title="Quietly follows how loud your room is (asks for microphone)">Room-aware</button>
 </div>
 
+<button id="quiet-entry" type="button" aria-label="Open code entry">.</button>
+<div id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title" aria-hidden="true">
+  <div class="gate-card">
+    <div class="gate-top">
+      <h1 class="gate-title" id="gate-title">code</h1>
+      <p class="gate-nonsense" id="gate-nonsense" hidden></p>
+    </div>
+    <form class="gate-form" id="gate-form" autocomplete="off">
+      <input class="gate-input" id="gate-input" type="password" inputmode="text" aria-label="Code" autocomplete="off" autocapitalize="off" spellcheck="false" required>
+      <p class="gate-error" id="gate-error" aria-live="polite"></p>
+    </form>
+  </div>
+</div>
+
 <script>
 const F=[["front","index.html","The menu and order form","A box to type, a language dropdown, a button.","The printed menu"],["front","styles.css","The decorator","Colors, fonts and spacing. All looks, no thinking.","Paint and flowers"],["kitchen","run.py","The key in the front door","Run it and the whole restaurant opens.","The OPEN sign switch"],["kitchen","main.py","The head waiter","Lists every order accepted and sends each to the right worker.","The one who runs the floor"],["kitchen","config.py","The settings board","Which chef, how long answers are, how big the speech model is.","The wall chart"],["kitchen","prompts.py","The chef’s rulebook","Be kind, use simple words, never diagnose, never change doses.","The house recipe book"],["kitchen","safety.py","The smoke alarm","Spots danger phrases in many languages and shouts for help instantly.","A fire alarm, independent of the chef"],["kitchen","services.py","The phone to the chef","Code that talks to Ollama and keeps the line open.","The kitchen hotline"],["kitchen","schemas.py","The order-form rules","No empty questions, no million-word essays.","The bouncer checking paperwork"],["kitchen","memory.py","The regulars notebook","Only if you opt in, it recalls up to three similar past chats.","A waiter who remembers your usual"],["kitchen","speech.py","The ear","Turns a voice recording into written words.","Someone writing down your spoken order"],["extra","requirements.txt","The shopping list","Every tool the kitchen needs installed.","Groceries"],["extra",".env.example","Settings template","Copy it to .env and add your own choices.","A blank order pad"],["extra","README.md","Instruction manuals","Step-by-step setup notes.","The staff handbook"]];
 const M=[["/api/chat","Answers a health question","Ordering the main dish"],["/api/explain","Explains a medical term or report","What’s in this sauce?"],["/api/prescription","Explains prescription wording, never invents doses","Reading the label aloud"],["/api/transcribe","Voice recording to text","Dictating your order"],["/api/memory","See or delete saved memory","Burning your notebook page"],["/health","Checks the kitchen is awake","Is anyone back there?"]];
 const R=[["Decide the menu","What can people ask for?"],["Write the order forms","Define a valid request (schemas.py)."],["Hire the workers","Code that does the real job (services.py)."],["Hire the waiter","Connect each dish to its worker (main.py)."],["Open the doors","Start it up (run.py)."]];
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+/* Client-side convenience gate only; codes and destination are inspectable in this page source. */
+const GATE_CODES={first:"3083",second:"H1LL@3083"};
+const MANGA_SHELF_URL="shelf.html";
+const gateState={step:1};
+const gateEl=$("#gate"),gateInput=$("#gate-input"),gateTitle=$("#gate-title"),gateNonsense=$("#gate-nonsense"),gateError=$("#gate-error");
+function openGate(){gateState.step=1;gateTitle.textContent="code";gateNonsense.hidden=true;gateNonsense.textContent="";gateInput.type="password";gateInput.setAttribute("aria-label","Code");gateInput.value="";gateError.textContent="";gateEl.classList.add("open");gateEl.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";setTimeout(()=>gateInput.focus(),0)}
+function closeGate(){gateEl.classList.remove("open");gateEl.setAttribute("aria-hidden","true");document.body.style.overflow="";$("#quiet-entry").focus()}
+$("#quiet-entry").addEventListener("click",openGate);
+gateEl.addEventListener("click",e=>{if(e.target===gateEl)closeGate()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&gateEl.classList.contains("open"))closeGate()});
+$("#gate-form").addEventListener("submit",e=>{e.preventDefault();const entered=gateInput.value;
+ if(gateState.step===1&&entered===GATE_CODES.first){gateState.step=2;gateTitle.textContent="The velvet teaspoon navigates west.";gateNonsense.textContent="Seven sleepy turnips polished the moonlit staircase while a paper lighthouse hummed into a cup of blue marmalade. The clocks wore mittens. None of the umbrellas remembered Tuesday.";gateNonsense.hidden=false;gateInput.value="";gateInput.type="text";gateInput.setAttribute("aria-label","Passphrase");gateError.textContent="";gateInput.focus();return}
+ if(gateState.step===2&&entered===GATE_CODES.second){window.location.assign(MANGA_SHELF_URL);return}
+ gateError.textContent="That code didn’t work. Try again.";gateInput.value="";gateInput.focus();
+});
 $("#fl").innerHTML=F.map(f=>`<div class="item r file" data-g="${f[0]}"><h3><code>${f[1]}</code>${f[2]}</h3><p>${f[3]}</p><p class="real">In real life: ${f[4]}</p></div>`).join("");
 $("#mn").innerHTML=M.map(m=>`<div class="row r"><code>${m[0]}</code><span><b>${m[1]}</b>${m[2]}</span></div>`).join("");
 $("#rc").innerHTML=R.map((r,i)=>`<div class="item flex r"><span class="n">${i+1}</span><div><h3>${r[0]}</h3><p>${r[1]}</p></div></div>`).join("");

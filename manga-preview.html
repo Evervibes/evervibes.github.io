@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#11100f"><title>Manga Shelf Preview</title>
+<style>
+:root{--bg:#11100f;--panel:#1b1917;--ink:#f4eee6;--muted:#aaa39b;--line:#38332e;--accent:#e9a86b;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}
+main{width:min(1180px,calc(100% - 32px));margin:auto}header{padding:clamp(30px,8vw,70px) 0 24px;border-bottom:1px solid var(--line)}
+.eyebrow{color:var(--accent);font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700}
+h1{font:500 clamp(2.5rem,8vw,4.5rem)/1.05 Georgia,serif;letter-spacing:-.04em;margin:8px 0}
+p{color:var(--muted);margin:8px 0 0}header a{display:inline-block;margin-top:14px;color:var(--accent)}
+ol{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:18px;padding:0;margin:24px 0 60px}
+.card{overflow:hidden;background:var(--panel);border:1px solid var(--line);border-radius:9px}
+.open{width:100%;padding:0;border:0;background:none;color:inherit;text-align:left;cursor:pointer}
+.open img{display:block;width:100%;aspect-ratio:.72;object-fit:cover;background:#26221e}
+.info{display:block;padding:12px 14px 14px}.info strong{display:block;font:500 1.15rem Georgia,serif}.info small{color:var(--muted)}
+dialog{width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;background:#0b0b0b;color:var(--ink)}
+dialog::backdrop{background:#000}.bar{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px max(12px,env(safe-area-inset-right)) 10px max(12px,env(safe-area-inset-left));background:#171615;border-bottom:1px solid #34312e}
+.bar strong{font:500 1.1rem Georgia,serif}.bar button{min-height:42px;padding:8px 14px;border:1px solid #47413b;border-radius:7px;background:#24211e;color:inherit;font:inherit}
+.pages{height:calc(100% - 62px);overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;text-align:center}
+.pages img{display:block;width:min(100%,900px);height:auto;margin:0 auto;background:#191919}
+@media(max-width:600px){ol{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{border-radius:7px}}
+</style></head><body><main><header><div class="eyebrow">Local preview</div><h1>Manga Shelf</h1>
+<p>73 volumes · Select a cover to preview its pages.</p><a href="shelf.html">Open the website shelf</a></header><ol><li class="card"><button class="open" type="button" data-index="0">
+<img src="m1-cover.jpg" alt="Manga 1 cover" loading="lazy">
+<span class="info"><strong>Manga 1</strong><small>29 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="1">
+<img src="m2-cover.jpg" alt="Manga 2 cover" loading="lazy">
+<span class="info"><strong>Manga 2</strong><small>54 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="2">
+<img src="m3-cover.jpg" alt="Manga 3 cover" loading="lazy">
+<span class="info"><strong>Manga 3</strong><small>3 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="3">
+<img src="m4-cover.jpg" alt="Manga 4 cover" loading="lazy">
+<span class="info"><strong>Manga 4</strong><small>35 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="4">
+<img src="m5-cover.jpg" alt="Manga 5 cover" loading="lazy">
+<span class="info"><strong>Manga 5</strong><small>24 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="5">
+<img src="m6-cover.jpg" alt="Manga 6 cover" loading="lazy">
+<span class="info"><strong>Manga 6</strong><small>29 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="6">
+<img src="m7-cover.jpg" alt="Manga 7 cover" loading="lazy">
+<span class="info"><strong>Manga 7</strong><small>46 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="7">
+<img src="m8-cover.jpg" alt="Manga 8 cover" loading="lazy">
+<span class="info"><strong>Manga 8</strong><small>57 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="8">
+<img src="m9-cover.jpg" alt="Manga 9 cover" loading="lazy">
+<span class="info"><strong>Manga 9</strong><small>332 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="9">
+<img src="m10-cover.jpg" alt="Manga 10 cover" loading="lazy">
+<span class="info"><strong>Manga 10</strong><small>817 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="10">
+<img src="m11-cover.jpg" alt="Manga 11 cover" loading="lazy">
+<span class="info"><strong>Manga 11</strong><small>30 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="11">
+<img src="m12-cover.jpg" alt="Manga 12 cover" loading="lazy">
+<span class="info"><strong>Manga 12</strong><small>16 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="12">
+<img src="m13-cover.jpg" alt="Manga 13 cover" loading="lazy">
+<span class="info"><strong>Manga 13</strong><small>15 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="13">
+<img src="m14-cover.jpg" alt="Manga 14 cover" loading="lazy">
+<span class="info"><strong>Manga 14</strong><small>54 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="14">
+<img src="m15-cover.jpg" alt="Manga 15 cover" loading="lazy">
+<span class="info"><strong>Manga 15</strong><small>26 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="15">
+<img src="m16-cover.jpg" alt="Manga 16 cover" loading="lazy">
+<span class="info"><strong>Manga 16</strong><small>24 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="16">
+<img src="m17-cover.jpg" alt="Manga 17 cover" loading="lazy">
+<span class="info"><strong>Manga 17</strong><small>9 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="17">
+<img src="m18-cover.jpg" alt="Manga 18 cover" loading="lazy">
+<span class="info"><strong>Manga 18</strong><small>73 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="18">
+<img src="m19-cover.jpg" alt="Manga 19 cover" loading="lazy">
+<span class="info"><strong>Manga 19</strong><small>10 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="19">
+<img src="m20-cover.jpg" alt="Manga 20 cover" loading="lazy">
+<span class="info"><strong>Manga 20</strong><small>24 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="20">
+<img src="m21-cover.jpg" alt="Manga 21 cover" loading="lazy">
+<span class="info"><strong>Manga 21</strong><small>13 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="21">
+<img src="m22-cover.jpg" alt="Manga 22 cover" loading="lazy">
+<span class="info"><strong>Manga 22</strong><small>15 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="22">
+<img src="m23-cover.jpg" alt="Manga 23 cover" loading="lazy">
+<span class="info"><strong>Manga 23</strong><small>15 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="23">
+<img src="m24-cover.jpg" alt="Manga 24 cover" loading="lazy">
+<span class="info"><strong>Manga 24</strong><small>48 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="24">
+<img src="m25-cover.jpg" alt="Manga 25 cover" loading="lazy">
+<span class="info"><strong>Manga 25</strong><small>140 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="25">
+<img src="m26-cover.jpg" alt="Manga 26 cover" loading="lazy">
+<span class="info"><strong>Manga 26</strong><small>5 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="26">
+<img src="m27-cover.jpg" alt="Manga 27 cover" loading="lazy">
+<span class="info"><strong>Manga 27</strong><small>12 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="27">
+<img src="m28-cover.jpg" alt="Manga 28 cover" loading="lazy">
+<span class="info"><strong>Manga 28</strong><small>30 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="28">
+<img src="m29-cover.jpg" alt="Manga 29 cover" loading="lazy">
+<span class="info"><strong>Manga 29</strong><small>11 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="29">
+<img src="m30-cover.jpg" alt="Manga 30 cover" loading="lazy">
+<span class="info"><strong>Manga 30</strong><small>12 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="30">
+<img src="m31-cover.jpg" alt="Manga 31 cover" loading="lazy">
+<span class="info"><strong>Manga 31</strong><small>6 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="31">
+<img src="m32-cover.jpg" alt="Manga 32 cover" loading="lazy">
+<span class="info"><strong>Manga 32</strong><small>65 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="32">
+<img src="m33-cover.jpg" alt="Manga 33 cover" loading="lazy">
+<span class="info"><strong>Manga 33</strong><small>12 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="33">
+<img src="m34-cover.jpg" alt="Manga 34 cover" loading="lazy">
+<span class="info"><strong>Manga 34</strong><small>29 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="34">
+<img src="m35-cover.jpg" alt="Manga 35 cover" loading="lazy">
+<span class="info"><strong>Manga 35</strong><small>6 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="35">
+<img src="m36-cover.jpg" alt="Manga 36 cover" loading="lazy">
+<span class="info"><strong>Manga 36</strong><small>64 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="36">
+<img src="m37-cover.jpg" alt="Manga 37 cover" loading="lazy">
+<span class="info"><strong>Manga 37</strong><small>332 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="37">
+<img src="m38-cover.jpg" alt="Manga 38 cover" loading="lazy">
+<span class="info"><strong>Manga 38</strong><small>817 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="38">
+<img src="m39-cover.jpg" alt="Manga 39 cover" loading="lazy">
+<span class="info"><strong>Manga 39</strong><small>30 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="39">
+<img src="m40-cover.jpg" alt="Manga 40 cover" loading="lazy">
+<span class="info"><strong>Manga 40</strong><small>29 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="40">
+<img src="m41-cover.jpg" alt="Manga 41 cover" loading="lazy">
+<span class="info"><strong>Manga 41</strong><small>16 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="41">
+<img src="m42-cover.jpg" alt="Manga 42 cover" loading="lazy">
+<span class="info"><strong>Manga 42</strong><small>15 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="42">
+<img src="m43-cover.jpg" alt="Manga 43 cover" loading="lazy">
+<span class="info"><strong>Manga 43</strong><small>54 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="43">
+<img src="m44-cover.jpg" alt="Manga 44 cover" loading="lazy">
+<span class="info"><strong>Manga 44</strong><small>26 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="44">
+<img src="m45-cover.jpg" alt="Manga 45 cover" loading="lazy">
+<span class="info"><strong>Manga 45</strong><small>22 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="45">
+<img src="m46-cover.jpg" alt="Manga 46 cover" loading="lazy">
+<span class="info"><strong>Manga 46</strong><small>26 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="46">
+<img src="m47-cover.jpg" alt="Manga 47 cover" loading="lazy">
+<span class="info"><strong>Manga 47</strong><small>24 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="47">
+<img src="m48-cover.jpg" alt="Manga 48 cover" loading="lazy">
+<span class="info"><strong>Manga 48</strong><small>9 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="48">
+<img src="m49-cover.jpg" alt="Manga 49 cover" loading="lazy">
+<span class="info"><strong>Manga 49</strong><small>73 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="49">
+<img src="m50-cover.jpg" alt="Manga 50 cover" loading="lazy">
+<span class="info"><strong>Manga 50</strong><small>10 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="50">
+<img src="m51-cover.jpg" alt="Manga 51 cover" loading="lazy">
+<span class="info"><strong>Manga 51</strong><small>24 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="51">
+<img src="m52-cover.jpg" alt="Manga 52 cover" loading="lazy">
+<span class="info"><strong>Manga 52</strong><small>13 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="52">
+<img src="m53-cover.jpg" alt="Manga 53 cover" loading="lazy">
+<span class="info"><strong>Manga 53</strong><small>15 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="53">
+<img src="m54-cover.jpg" alt="Manga 54 cover" loading="lazy">
+<span class="info"><strong>Manga 54</strong><small>15 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="54">
+<img src="m55-cover.jpg" alt="Manga 55 cover" loading="lazy">
+<span class="info"><strong>Manga 55</strong><small>48 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="55">
+<img src="m56-cover.jpg" alt="Manga 56 cover" loading="lazy">
+<span class="info"><strong>Manga 56</strong><small>7 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="56">
+<img src="m57-cover.jpg" alt="Manga 57 cover" loading="lazy">
+<span class="info"><strong>Manga 57</strong><small>7 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="57">
+<img src="m58-cover.jpg" alt="Manga 58 cover" loading="lazy">
+<span class="info"><strong>Manga 58</strong><small>140 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="58">
+<img src="m59-cover.jpg" alt="Manga 59 cover" loading="lazy">
+<span class="info"><strong>Manga 59</strong><small>5 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="59">
+<img src="m60-cover.jpg" alt="Manga 60 cover" loading="lazy">
+<span class="info"><strong>Manga 60</strong><small>12 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="60">
+<img src="m61-cover.jpg" alt="Manga 61 cover" loading="lazy">
+<span class="info"><strong>Manga 61</strong><small>30 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="61">
+<img src="m62-cover.jpg" alt="Manga 62 cover" loading="lazy">
+<span class="info"><strong>Manga 62</strong><small>11 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="62">
+<img src="m63-cover.jpg" alt="Manga 63 cover" loading="lazy">
+<span class="info"><strong>Manga 63</strong><small>12 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="63">
+<img src="m64-cover.jpg" alt="Manga 64 cover" loading="lazy">
+<span class="info"><strong>Manga 64</strong><small>19 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="64">
+<img src="m65-cover.jpg" alt="Manga 65 cover" loading="lazy">
+<span class="info"><strong>Manga 65</strong><small>6 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="65">
+<img src="m66-cover.jpg" alt="Manga 66 cover" loading="lazy">
+<span class="info"><strong>Manga 66</strong><small>65 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="66">
+<img src="m67-cover.jpg" alt="Manga 67 cover" loading="lazy">
+<span class="info"><strong>Manga 67</strong><small>12 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="67">
+<img src="m68-cover.jpg" alt="Manga 68 cover" loading="lazy">
+<span class="info"><strong>Manga 68</strong><small>13 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="68">
+<img src="m69-cover.jpg" alt="Manga 69 cover" loading="lazy">
+<span class="info"><strong>Manga 69</strong><small>29 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="69">
+<img src="m70-cover.jpg" alt="Manga 70 cover" loading="lazy">
+<span class="info"><strong>Manga 70</strong><small>32 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="70">
+<img src="m71-cover.jpg" alt="Manga 71 cover" loading="lazy">
+<span class="info"><strong>Manga 71</strong><small>18 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="71">
+<img src="m72-cover.jpg" alt="Manga 72 cover" loading="lazy">
+<span class="info"><strong>Manga 72</strong><small>43 pages</small></span>
+</button></li>
+<li class="card"><button class="open" type="button" data-index="72">
+<img src="m73-cover.jpg" alt="Manga 73 cover" loading="lazy">
+<span class="info"><strong>Manga 73</strong><small>46 pages</small></span>
+</button></li></ol></main>
+<dialog id="reader"><div class="bar"><strong id="title"></strong><button id="close" type="button">Close</button></div><div class="pages" id="pages"></div></dialog>
+<script>
+const volumes=[{"id": 1, "pages": 29}, {"id": 2, "pages": 54}, {"id": 3, "pages": 3}, {"id": 4, "pages": 35}, {"id": 5, "pages": 24}, {"id": 6, "pages": 29}, {"id": 7, "pages": 46}, {"id": 8, "pages": 57}, {"id": 9, "pages": 332}, {"id": 10, "pages": 817}, {"id": 11, "pages": 30}, {"id": 12, "pages": 16}, {"id": 13, "pages": 15}, {"id": 14, "pages": 54}, {"id": 15, "pages": 26}, {"id": 16, "pages": 24}, {"id": 17, "pages": 9}, {"id": 18, "pages": 73}, {"id": 19, "pages": 10}, {"id": 20, "pages": 24}, {"id": 21, "pages": 13}, {"id": 22, "pages": 15}, {"id": 23, "pages": 15}, {"id": 24, "pages": 48}, {"id": 25, "pages": 140}, {"id": 26, "pages": 5}, {"id": 27, "pages": 12}, {"id": 28, "pages": 30}, {"id": 29, "pages": 11}, {"id": 30, "pages": 12}, {"id": 31, "pages": 6}, {"id": 32, "pages": 65}, {"id": 33, "pages": 12}, {"id": 34, "pages": 29}, {"id": 35, "pages": 6}, {"id": 36, "pages": 64}, {"id": 37, "pages": 332}, {"id": 38, "pages": 817}, {"id": 39, "pages": 30}, {"id": 40, "pages": 29}, {"id": 41, "pages": 16}, {"id": 42, "pages": 15}, {"id": 43, "pages": 54}, {"id": 44, "pages": 26}, {"id": 45, "pages": 22}, {"id": 46, "pages": 26}, {"id": 47, "pages": 24}, {"id": 48, "pages": 9}, {"id": 49, "pages": 73}, {"id": 50, "pages": 10}, {"id": 51, "pages": 24}, {"id": 52, "pages": 13}, {"id": 53, "pages": 15}, {"id": 54, "pages": 15}, {"id": 55, "pages": 48}, {"id": 56, "pages": 7}, {"id": 57, "pages": 7}, {"id": 58, "pages": 140}, {"id": 59, "pages": 5}, {"id": 60, "pages": 12}, {"id": 61, "pages": 30}, {"id": 62, "pages": 11}, {"id": 63, "pages": 12}, {"id": 64, "pages": 19}, {"id": 65, "pages": 6}, {"id": 66, "pages": 65}, {"id": 67, "pages": 12}, {"id": 68, "pages": 13}, {"id": 69, "pages": 29}, {"id": 70, "pages": 32}, {"id": 71, "pages": 18}, {"id": 72, "pages": 43}, {"id": 73, "pages": 46}];const reader=document.querySelector('#reader');const pages=document.querySelector('#pages');
+document.querySelectorAll('.open').forEach(button=>button.addEventListener('click',()=>{
+const volume=volumes[Number(button.dataset.index)];document.querySelector('#title').textContent=`Manga ${volume.id} · ${volume.pages} pages`;
+pages.replaceChildren();for(let page=1;page<=volume.pages;page++){const image=document.createElement('img');image.src=`m${volume.id}-${String(page).padStart(3,'0')}.jpg`;image.alt=`Manga ${volume.id}, page ${page}`;image.loading=page<3?'eager':'lazy';pages.append(image)}reader.showModal();pages.scrollTop=0;
+}));document.querySelector('#close').addEventListener('click',()=>reader.close());reader.addEventListener('click',event=>{if(event.target===reader)reader.close()});
+</script></body></html>

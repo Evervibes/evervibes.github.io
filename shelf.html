@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#11100f">
+  <title>Manga Shelf</title>
+  <style>
+    :root { color-scheme: dark; --bg:#11100f; --panel:#1b1917; --muted:#aaa39b; --ink:#f4eee6; --accent:#e9a86b; --line:#38332e; }
+    * { box-sizing:border-box }
+    body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif }
+    button { font:inherit; color:inherit }
+    .wrap { width:min(1180px, calc(100% - 40px)); margin-inline:auto }
+    header { padding:54px 0 30px; border-bottom:1px solid var(--line) }
+    .eyebrow { color:var(--accent); text-transform:uppercase; letter-spacing:.18em; font-size:.75rem; font-weight:700 }
+    h1 { margin:8px 0; font:500 clamp(2.5rem,7vw,5rem)/1.02 Georgia,serif; letter-spacing:-.04em }
+    header p { color:var(--muted); margin:12px 0 0 }
+    .shelf-heading { display:flex; align-items:baseline; justify-content:space-between; margin:28px 0 16px }
+    h2 { font:500 1.55rem Georgia,serif; margin:0 }
+    .count { color:var(--muted); font-size:.9rem }
+    ol.shelf { list-style:none; margin:0 0 60px; padding:0; display:grid; grid-template-columns:repeat(auto-fill,minmax(175px,1fr)); gap:22px }
+    .card { overflow:hidden; background:var(--panel); border:1px solid var(--line); border-radius:9px; transition:transform .18s,border-color .18s }
+    .card:hover { transform:translateY(-3px); border-color:#74604d }
+    .open-card { display:block; width:100%; padding:0; border:0; background:none; text-align:left; cursor:pointer }
+    .cover { display:block; width:100%; aspect-ratio: .72; object-fit:cover; background:#26221e }
+    .card-info { padding:13px 14px 15px }
+    .card-title { display:block; font:500 1.2rem Georgia,serif }
+    .card-meta { display:block; color:var(--muted); font-size:.85rem; margin-top:4px }
+    .reader { position:fixed; inset:0; z-index:5; display:none; background:#0b0b0b; height:100vh; height:100dvh }
+    .reader.active { display:flex; flex-direction:column }
+    .toolbar { flex:none; min-height:58px; display:flex; align-items:center; justify-content:space-between; gap:12px; padding:8px clamp(12px,3vw,30px); padding-top:max(8px, env(safe-area-inset-top)); background:#171615; border-bottom:1px solid #34312e; z-index:2 }
+    .toolbar-group { display:flex; align-items:center; gap:9px }
+    .tool-btn { border:1px solid #47413b; background:#24211e; padding:8px 12px; border-radius:6px; cursor:pointer }
+    .tool-btn:hover { border-color:var(--accent) }
+    .tool-btn:disabled { opacity:.4; cursor:not-allowed }
+    .reader-label { min-width:0 }
+    .reader-label strong { display:block; font:500 1.05rem Georgia,serif }
+    .reader-label span { color:var(--muted); font-size:.8rem }
+    .pages { flex:1; min-height:0; overflow:auto; overscroll-behavior:contain; -webkit-overflow-scrolling:touch; text-align:center; scroll-behavior:smooth; touch-action:pan-y }
+    .page { display:block; width:min(100%, 900px); max-width:100%; height:auto; margin:0 auto; background:#191919 }
+    .pages.fit-screen .page { width:auto; max-width:100%; height:auto; max-height:calc(100dvh - var(--toolbar-height, 58px)); object-fit:contain }
+    .page[ loading="lazy"] { min-height:60vh }
+    @media(max-width:700px) {
+      .wrap { width:calc(100% - 28px) }
+      header { padding:clamp(28px,8vw,42px) 0 24px }
+      ol.shelf { grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(10px,3vw,16px) }
+      .card { border-radius:7px }
+      .card-info { padding:10px 11px 12px }
+      .card-title { font-size:1.08rem }
+      .toolbar { min-height:0; display:grid; grid-template-columns:1fr auto; gap:6px; padding:8px 10px; padding-top:max(8px,env(safe-area-inset-top)) }
+      .toolbar-group { gap:6px }
+      .toolbar-group:last-child { grid-column:1 / -1; justify-content:space-between }
+      .toolbar-group:last-child .tool-btn { flex:1 }
+      .tool-btn { min-height:42px; padding:7px 10px; font-size:.86rem; touch-action:manipulation }
+      .reader-label { text-align:right; line-height:1.25 }
+      .reader-label strong { font-size:.98rem }
+      .reader-label span { font-size:.72rem }
+      .page { width:100% }
+      .page[ loading="lazy"] { min-height:45vh }
+    }
+    @media(max-width:390px) {
+      .wrap { width:calc(100% - 20px) }
+      .toolbar { grid-template-columns:1fr auto; padding-inline:6px }
+      .tool-btn { padding-inline:7px; font-size:.8rem }
+      .card-meta { font-size:.78rem }
+    }
+    @media(orientation:landscape) and (max-height:520px) {
+      .toolbar { min-height:46px; padding-block:4px }
+      .tool-btn { min-height:36px; padding-block:4px }
+      .reader-label span { display:none }
+      .pages.fit-screen .page { max-height:calc(100dvh - 46px) }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <div class="eyebrow">Your collection</div>
+      <h1>Manga Shelf</h1>
+      <p>Pick a volume to start reading. Pages are arranged in numerical order.</p>
+    </header>
+    <section aria-labelledby="shelf-heading">
+      <div class="shelf-heading"><h2 id="shelf-heading">Volumes</h2><span class="count" id="volume-count"></span></div>
+      <ol class="shelf" id="shelf"></ol>
+    </section>
+  </main>
+  <section class="reader" id="reader" aria-label="Manga reader" aria-hidden="true">
+    <nav class="toolbar" aria-label="Reader controls">
+      <div class="toolbar-group"><button class="tool-btn" id="close" type="button" title="Close reader (Escape)">← Shelf</button></div>
+      <div class="reader-label"><strong id="reader-title"></strong><span id="page-count">Scroll to read</span></div>
+      <div class="toolbar-group">
+        <button class="tool-btn" id="fit-toggle" type="button" aria-pressed="false" title="Toggle fit screen mode">Fit screen</button>
+        <button class="tool-btn" id="prev-volume" type="button" aria-label="Previous volume">‹ Prev</button>
+        <button class="tool-btn" id="next-volume" type="button" aria-label="Next volume">Next ›</button>
+      </div>
+    </nav>
+    <div class="pages" id="pages" tabindex="0" aria-label="Manga pages"></div>
+  </section>
+  <script>
+    // Image files in this folder follow m<number>-<page>.jpg; covers are m<number>-cover.jpg.
+    const volumes = [
+      { id: 1, pages: 29 },
+      { id: 2, pages: 54 },
+      { id: 3, pages: 3 },
+      { id: 4, pages: 35 },
+      { id: 5, pages: 24 },
+      { id: 6, pages: 29 },
+      { id: 7, pages: 46 },
+      { id: 8, pages: 57 },
+      { id: 9, pages: 332 },
+      { id: 10, pages: 817 },
+      { id: 11, pages: 30 },
+      { id: 12, pages: 16 },
+      { id: 13, pages: 15 },
+      { id: 14, pages: 54 },
+      { id: 15, pages: 26 },
+      { id: 16, pages: 24 },
+      { id: 17, pages: 9 },
+      { id: 18, pages: 73 },
+      { id: 19, pages: 10 },
+      { id: 20, pages: 24 },
+      { id: 21, pages: 13 },
+      { id: 22, pages: 15 },
+      { id: 23, pages: 15 },
+      { id: 24, pages: 48 },
+      { id: 25, pages: 140 },
+      { id: 26, pages: 5 },
+      { id: 27, pages: 12 },
+      { id: 28, pages: 30 },
+      { id: 29, pages: 11 },
+      { id: 30, pages: 12 },
+      { id: 31, pages: 6 },
+      { id: 32, pages: 65 },
+      { id: 33, pages: 12 },
+      { id: 34, pages: 29 },
+      { id: 35, pages: 6 },
+      { id: 36, pages: 64 },
+      { id: 37, pages: 332 },
+      { id: 38, pages: 817 },
+      { id: 39, pages: 30 },
+      { id: 40, pages: 29 },
+      { id: 41, pages: 16 },
+      { id: 42, pages: 15 },
+      { id: 43, pages: 54 },
+      { id: 44, pages: 26 },
+      { id: 45, pages: 22 },
+      { id: 46, pages: 26 },
+      { id: 47, pages: 24 },
+      { id: 48, pages: 9 },
+      { id: 49, pages: 73 },
+      { id: 50, pages: 10 },
+      { id: 51, pages: 24 },
+      { id: 52, pages: 13 },
+      { id: 53, pages: 15 },
+      { id: 54, pages: 15 },
+      { id: 55, pages: 48 },
+      { id: 56, pages: 7 },
+      { id: 57, pages: 7 },
+      { id: 58, pages: 140 },
+      { id: 59, pages: 5 },
+      { id: 60, pages: 12 },
+      { id: 61, pages: 30 },
+      { id: 62, pages: 11 },
+      { id: 63, pages: 12 },
+      { id: 64, pages: 19 },
+      { id: 65, pages: 6 },
+      { id: 66, pages: 65 },
+      { id: 67, pages: 12 },
+      { id: 68, pages: 13 },
+      { id: 69, pages: 29 },
+      { id: 70, pages: 32 },
+      { id: 71, pages: 18 },
+      { id: 72, pages: 43 },
+      { id: 73, pages: 46 }
+    ];
+    const shelf = document.querySelector('#shelf');
+    const reader = document.querySelector('#reader');
+    const pages = document.querySelector('#pages');
+    let current = 0;
+    const pad = n => String(n).padStart(3, '0');
+
+    document.querySelector('#volume-count').textContent = `${volumes.length} volumes`;
+    volumes.forEach((volume, index) => {
+      const item = document.createElement('li');
+      item.className = 'card';
+      const button = document.createElement('button');
+      button.type = 'button'; button.className = 'open-card';
+      button.setAttribute('aria-label', `Read Manga ${volume.id}, ${volume.pages} pages`);
+      const cover = document.createElement('img');
+      cover.className = 'cover'; cover.src = `m${volume.id}-cover.jpg`; cover.alt = `Manga ${volume.id} cover`; cover.loading = 'lazy';
+      const info = document.createElement('span'); info.className = 'card-info';
+      info.innerHTML = `<span class="card-title">Manga ${volume.id}</span><span class="card-meta">${volume.pages} pages</span>`;
+      button.append(cover, info); button.addEventListener('click', () => openVolume(index));
+      item.append(button); shelf.append(item);
+    });
+
+    function openVolume(index) {
+      current = index;
+      const volume = volumes[current];
+      document.querySelector('#reader-title').textContent = `Manga ${volume.id}`;
+      document.querySelector('#page-count').textContent = `${volume.pages} pages · scroll to read`;
+      document.querySelector('#prev-volume').disabled = current === 0;
+      document.querySelector('#next-volume').disabled = current === volumes.length - 1;
+      pages.classList.remove('fit-screen');
+      const fitToggle = document.querySelector('#fit-toggle');
+      fitToggle.setAttribute('aria-pressed', 'false'); fitToggle.textContent = 'Fit screen';
+      pages.replaceChildren();
+      for (let n = 1; n <= volume.pages; n++) {
+        const image = document.createElement('img');
+        image.className = 'page'; image.src = `m${volume.id}-${pad(n)}.jpg`;
+        image.alt = `Manga ${volume.id}, page ${n}`; image.loading = n < 3 ? 'eager' : 'lazy';
+        pages.append(image);
+      }
+      reader.classList.add('active'); reader.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden'; pages.scrollTop = 0;
+      document.querySelector('#close').focus();
+    }
+    function closeReader() {
+      reader.classList.remove('active'); reader.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = ''; pages.replaceChildren();
+    }
+    document.querySelector('#close').addEventListener('click', closeReader);
+    document.querySelector('#prev-volume').addEventListener('click', () => { if (current > 0) openVolume(current - 1); });
+    document.querySelector('#next-volume').addEventListener('click', () => { if (current < volumes.length - 1) openVolume(current + 1); });
+    document.querySelector('#fit-toggle').addEventListener('click', event => {
+      const fit = pages.classList.toggle('fit-screen');
+      event.currentTarget.setAttribute('aria-pressed', String(fit));
+      event.currentTarget.textContent = fit ? 'Fit width' : 'Fit screen';
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && reader.classList.contains('active')) closeReader();
+      if (reader.classList.contains('active') && event.key === 'ArrowDown') pages.scrollBy({ top: innerHeight * .8, behavior: 'smooth' });
+      if (reader.classList.contains('active') && event.key === 'ArrowUp') pages.scrollBy({ top: -innerHeight * .8, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
